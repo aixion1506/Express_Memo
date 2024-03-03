@@ -1,4 +1,5 @@
 const express = require('express');
+const noteRouter = require('./routes/notes');
 
 const app = express();
 
@@ -7,6 +8,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('START');
 });
+
+app.use('/notes', noteRouter);
 
 // 에러 핸들링 미들웨어
 app.use((err, req, res, next) => {
@@ -25,5 +28,7 @@ app. use((req, res, next) => {
         error : `Page not found ${req.path}`,
     });
 });
+
+
 
 app.listen(8080);
