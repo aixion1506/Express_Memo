@@ -1,5 +1,6 @@
 const express = require('express');
 const noteRouter = require('./routes/notes');
+const authorRouter = require('./routes/authors')
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/notes', noteRouter);
+app.use('/authors', authorRouter);
 
 // 에러 핸들링 미들웨어
 app.use((err, req, res, next) => {
@@ -21,7 +23,7 @@ app.use((err, req, res, next) => {
 });
 
 // 404 핸들링 미들웨어
-app. use((req, res, next) => {
+app.use((req, res, next) => {
     res.status(404);
     res.json({
         result : 'fail',
