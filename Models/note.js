@@ -22,12 +22,13 @@ exports.list = () => {
 }
 
 exports.get = (id) => {
-    const note = notes.find((note) => note.id === id);
+    const note = notes.find(
+        (note) => note.id === id)
+    ;
 
     if (!note) {
         throw new Error('Note not found');
     }
-
     return note;
 }
 
