@@ -24,17 +24,19 @@ router.get('/:id', (req, res, next) => {
 // 게시글 게시 라우터
 router.post('/', (req, res, next) => {
     const {title, content} = req.body;
-    const note = Note.create(title, content);
+    const author = req.get('author');
+    const note = Note.create(title, content, author);
     res.json(note);
 })
 
 // 게시글 수정 라우터
 router.put('/:id', (req, res, next) => {
     const id = Number(req.params.id);
+    const author = req.get('author');
     const {title, content} = req.body;
 
     try {
-        const note = Note.update(id, title, content);
+        const note = Note.update(id, title, content, author);
         res.json(note);
     } catch (e) {
         next(e);
@@ -44,9 +46,10 @@ router.put('/:id', (req, res, next) => {
 // 게시글 삭제 라우터
 router.delete('/:id', (req, res, next) => {
     const id = Number(req.params.id);
+    const author = req.get('author');
 
     try {
-        Note.delete(id);
+        Note.delete(id, author);
         res.json({result : 'sucecss'});
     } catch (e) {
         next(e);
