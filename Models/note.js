@@ -1,3 +1,6 @@
+const { time } = require("console");
+const { title } = require("process");
+
 let notes = [
     {
         id : 1,
@@ -30,6 +33,46 @@ exports.get = (id) => {
         throw new Error('Note not found');
     }
     return note;
+}
+
+exports.create = (title, content, author) => {
+    const {id: lastId} = notes[notes.length - 1];
+    const newNote = {
+        id: lastId + 1,
+        title,
+        content,
+        author,
+    }
+
+    notes.push(newNote);
+    return newNote;
+};
+
+exports.update = (id, title, content, author) => {
+    const index = notes.findIndex((note) => note.id === id);
+    if (index < 0) {
+        throw new Error('Note not found for update');
+    }
+    
+    const note = notes[index];
+
+    if (note.author !== author) {
+        throw new Error("Aujthor not mathces");
+    }
+
+    note.title = title;
+    note.content = content;
+    notes[index] = note;
+    return note;
+}
+
+exports.delete = (id) => {
+    if (!notes.some((note) => note.id ===id )) {
+        throw new Error('Note not found for delete');
+    }
+
+    notes = notes.filter(note => note.id !== id);
+    return ;
 }
 
 exports.authorList = () => {
