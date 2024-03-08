@@ -1,10 +1,16 @@
 const { Router } = require('express');
-const Note = require('../Models/note');
+const Note = require('../models/note');
 
 const router = Router();
 
 
 router.get('/', (req, res, next) => {
+    const { search } = req.query;
+    if (search) {
+        const notes = Note.search(search);
+        res.json(notes);
+        return ;
+    }
     const notes = Note.list();
     res.json(notes);
 })
