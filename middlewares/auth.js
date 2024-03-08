@@ -6,16 +6,12 @@ module.exports = (req, res, next) => {
         return;
     }
     
-    // admin 확인하기
-    if ( admin === 'author'){
+    if ( author === 'admin') {
         const password = req.get(password);
-        if ( pasword !== '1234!') {
-            next( new Error('Invalid Admin Password'));
+        if (password !== '1234') {
+            next(new Error('Invalid Admin Password'));
+            return;
         }
-        return;
     }
     next();
 }
-
-
-

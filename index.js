@@ -1,6 +1,7 @@
 const express = require('express');
 const noteRouter = require('./routes/notes');
 const authorRouter = require('./routes/authors')
+const auth = require('./middlewares/auth');
 
 const app = express();
 
@@ -10,7 +11,7 @@ app.get('/', (req, res) => {
     res.send('START');
 });
 
-app.use('/notes', noteRouter);
+app.use('/notes', auth, noteRouter);
 app.use('/authors', authorRouter);
 
 // 에러 핸들링 미들웨어
