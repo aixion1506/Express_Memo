@@ -2,6 +2,7 @@ const express = require('express');
 const noteRouter = require('./routes/notes');
 const authorRouter = require('./routes/authors')
 const auth = require('./middlewares/auth');
+const setUser = require('./middlewares/set-user');
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.get('/', (req, res) => {
 
 app.use('/notes', auth, noteRouter);
 app.use('/authors', authorRouter);
+app.use('/users', setUser(), usersRouter);
+app.use('/admin', setUser("admin"), adminRouter);
 
 // 에러 핸들링 미들웨어
 app.use((err, req, res, next) => {
