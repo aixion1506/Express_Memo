@@ -1,6 +1,3 @@
-const { time } = require("console");
-const { title } = require("process");
-
 let notes = [
     {
         id : 1,
