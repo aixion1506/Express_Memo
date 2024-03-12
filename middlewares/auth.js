@@ -6,8 +6,8 @@ module.exports = (req, res, next) => {
         return;
     }
     
-    if ( author === 'admin') {
-        const password = req.get(password);
+    if (author === "admin") {
+        const password = req.get("password");
         if (password !== '1234') {
             next(new Error('Invalid Admin Password'));
             return;
