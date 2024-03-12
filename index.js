@@ -1,8 +1,14 @@
 const express = require('express');
+
 const noteRouter = require('./routes/notes');
-const authorRouter = require('./routes/authors')
+const authorRouter = require('./routes/authors');
 const auth = require('./middlewares/auth');
+
+const usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
 const setUser = require('./middlewares/set-user');
+const adjuerQuery = require('./middlewares/adjust-query');
+
 
 const app = express();
 
@@ -11,6 +17,7 @@ const hasError = (req, res, next) => {
 }
 
 app.use(express.json());
+app.use(adjuerQuery);
 
 app.get('/', (req, res) => {
     res.send('START');

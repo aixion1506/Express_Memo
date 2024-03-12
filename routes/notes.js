@@ -18,7 +18,6 @@ router.get('/', (req, res, next) => {
 // 아이디의 리스트
 router.get('/:id', (req, res, next) => {
     const id = Number(req.params.id);
-
     try {
         const note = Note.get(id);
         res.json(note);
@@ -40,7 +39,6 @@ router.put('/:id', (req, res, next) => {
     const id = Number(req.params.id);
     const author = req.get('author');
     const {title, content} = req.body;
-
     try {
         const note = Note.update(id, title, content, author);
         res.json(note);
