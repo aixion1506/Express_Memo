@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const router = Router;
+const router = Router();
 
 router.get('/', (req, res) => {
     const {name, level} = req.user ||{name: 'NotFound', level: 0};
