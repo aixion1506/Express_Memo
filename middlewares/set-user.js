@@ -1,4 +1,4 @@
-const users = require('../data'/users);
+const users = require('../data/users');
 
 const setUsers = (type) => (req, res, next) => {
     const {userName} = req.query;
